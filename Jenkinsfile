@@ -5,29 +5,19 @@ pipeline{
         disableConcurrentBuilds()
         timeout(time: 10, unit: 'MINUTES')
     }
-    environment {
-      
-    }
     
-    parameters {
-        choice(name: 'OPEARTION', choices: ['STOP', 'START'])
-    }
     stages{
-        stage('start'){
+        stage('git-checkout'){
             steps{
-                sh "echo hello C32"
+                git branch: 'main', url: 'https://github.com/priyanka-ajay-c32/ec2startstop.git' 
             }
         }
+        
         stage('run Python script'){
             steps{
-                sh "echo hello C32"
-                sh "sleep 8"
+                sh "pwd"
+                sh "python3 stop.py"
             }
-        }
-    }
-    post{
-        success{
-            slackSend channel: 'jenkins', message: 'build success'
         }
     }
 }
