@@ -16,9 +16,10 @@ instances = [i for i in ec2.instances.filter(
       'Name':'tag:J-M', 'Values':['True']
     },
     {
-      'Name': 'tag:J-M', 'Values': ['running']
+      'Name': 'tag:TBD-S', 'Values': ['True']
     }
-  ])]
+  ]
+)]
 # Filter from all instances the instance that are not in the filtered list
 instances_to_stop = [to_stop for to_stop in all_instances if to_stop.id not in [i.id for i in instances]]
 
