@@ -13,12 +13,12 @@ pipeline{
         choice(name: 'OPEARTION', choices: ['STOP', 'START'])
     }
     stages{
-        stage('Unit Testing'){
+        stage('start'){
             steps{
                 sh "echo hello C32"
             }
         }
-        stage('Build '){
+        stage('run Python script'){
             steps{
                 sh "echo hello C32"
                 sh "sleep 8"
