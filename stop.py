@@ -7,7 +7,18 @@ ec2 = boto3.resource('ec2', region_name=region)
 # find all instances that are running
 all_instances = [i for i in ec2.instances.filter(Filters=[{'Name': 'instance-state-name', 'Values': ['running']}])]
 # get instances with filter of running + with tag `Name`
-instances = [i for i in ec2.instances.filter(Filters=[{'Name': 'instance-state-name', 'Values': ['running']}, {'Name':'tag:jenkins-machine', 'Values':['True']}])]
+instances = [i for i in ec2.instances.filter(
+  Filters=[
+    {
+      'Name': 'instance-state-name', 'Values': ['running']
+    }, 
+    {
+      'Name':'tag:J-M', 'Values':['True']
+    },
+    {
+      'Name': 'tag:J-M', 'Values': ['running']
+    }
+  ])]
 # Filter from all instances the instance that are not in the filtered list
 instances_to_stop = [to_stop for to_stop in all_instances if to_stop.id not in [i.id for i in instances]]
 
